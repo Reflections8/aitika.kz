@@ -1,0 +1,5 @@
+Site key
+6LdY42sfAAAAABpx-Q0UDG6s1ii53IDqSFKVWI5F
+
+Secret key
+6LdY42sfAAAAALyKfavJj9qnKe1NbGfal8DsMU4D
