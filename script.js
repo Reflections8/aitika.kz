@@ -188,3 +188,45 @@ $('form').submit(function(e) {
 	});
 	return false;
 });
+
+/*SLIDER*/ 
+let position = 0;
+const slidesToShow = 1,
+		slidesToScroll = 1,
+		container = document.querySelector('.slider-container'),
+		track = document.querySelector('.slider-track'),
+		btnPrev = document.querySelector('.slider-buttons__prev'),
+		btnNext = document.querySelector('.slider-buttons__next'),
+		items = document.querySelectorAll('.slider-item'),
+		itemsCount = items.length,
+		itemWidth = container.clientWidth / slidesToShow,
+		movePosition = slidesToScroll * itemWidth;
+
+items.forEach((item) => {
+	item.style.minWidth = `${itemWidth}px`;
+});
+
+btnPrev.addEventListener('click', () => {
+	const itemsLeft = Math.abs(position) / itemWidth;
+	position += itemsLeft >= slidesToScroll ? movePosition : itemsLeft * itemWidth;
+	setPosition();
+	checkButtons();
+});
+
+btnNext.addEventListener('click', () => {
+	const itemsLeft = itemsCount - (Math.abs(position) + slidesToShow * itemWidth) / itemWidth;
+	position -= itemsLeft >= slidesToScroll ? movePosition : itemsLeft * itemWidth;
+	setPosition();
+	checkButtons();
+});
+
+const setPosition = () => {
+	track.style.transform = `translateX(${position}px)`;
+};
+
+const checkButtons = () => {
+	btnPrev.disabled = position === 0;
+	btnNext.disabled = position <= -(itemsCount - slidesToShow) * itemWidth;
+};
+
+checkButtons();
